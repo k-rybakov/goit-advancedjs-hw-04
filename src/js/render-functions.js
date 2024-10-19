@@ -86,11 +86,6 @@ export const showLoader = () => (loader.style.display = 'block');
 
 export const hideLoader = () => (loader.style.display = 'none');
 
-export const hideLoadMoreBtn = () => {
-  loadMoreBtn.style.display = 'none';
-  toast.success({
-    message: "We're sorry, but you've reached the end of search results.",
-  });
-};
+export const hideLoadMoreBtn = () => (loadMoreBtn.style.display = 'none');
 
 export const showLoadMoreBtn = () => (loadMoreBtn.style.display = 'block');

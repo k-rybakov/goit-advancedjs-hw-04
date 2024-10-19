@@ -33,10 +33,7 @@ form.addEventListener('submit', async e => {
     showLoader();
     const apiResponse = await findPhotos(query, page);
     totalPages = parseInt(apiResponse.total / PER_PAGE);
-    console.log(apiResponse);
-
     renderGallery(apiResponse?.hits ?? []);
-
     page < totalPages ? showLoadMoreBtn() : hideLoadMoreBtn();
     page++;
   } catch (e) {
@@ -56,7 +53,16 @@ loadMoreBtn.addEventListener('click', async e => {
     const apiResponse = await findPhotos(currentQuery, page);
 
     renderGallery(apiResponse?.hits ?? []);
-    page < totalPages ? showLoadMoreBtn() : hideLoadMoreBtn();
+
+    if (page < totalPages) {
+      showLoadMoreBtn();
+    } else {
+      hideLoadMoreBtn();
+      toast(
+        "We're sorry, but you've reached the end of search results.",
+        'success'
+      );
+    }
     page++;
   } catch (e) {
     console.log(e.message);
