@@ -28,11 +28,13 @@ form.addEventListener('submit', async e => {
 
   document.querySelector('.gallery').innerHTML = '';
   currentQuery = query;
+  page = 1;
 
   try {
     showLoader();
     const apiResponse = await findPhotos(query, page);
-    totalPages = parseInt(apiResponse.total / PER_PAGE);
+    totalPages = Math.ceil(apiResponse.total / PER_PAGE);
+
     renderGallery(apiResponse?.hits ?? []);
     page < totalPages ? showLoadMoreBtn() : hideLoadMoreBtn();
     page++;
